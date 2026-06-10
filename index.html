@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kəşf — Discover Azerbaijan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="logo">
+        <span class="logo-k">K</span><span class="logo-rest">əşf</span>
+      </div>
+      <div class="nav-links">
+        <a href="#">Explore</a>
+        <a href="#">Top Lists</a>
+        <a href="#">Events</a>
+        <a href="#">For Business</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn-ghost">Log in</button>
+        <button class="btn-primary">Sign up</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="tile-canvas"></canvas>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Azerbaijan's #1 Discovery Platform</p>
+      <h1 class="hero-title">
+        Find your next<br />
+        <span class="hero-title-accent" id="rotating-word">favourite spot</span>
+      </h1>
+      <p class="hero-sub">From hidden Baku tea houses to rooftop restaurants in Gabala — real reviews, real people.</p>
+
+      <div class="search-bar" id="hero-search">
+        <div class="search-field">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" placeholder="restaurants, coffee, shisha…" id="search-input" />
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-field">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <input type="text" placeholder="Baku, Ganja, Sheki…" id="location-input" value="Baku" />
+        </div>
+        <button class="search-btn" id="search-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+      </div>
+
+      <div class="hero-tags">
+        <span class="tag" data-cat="restaurants">🍽 Restaurants</span>
+        <span class="tag" data-cat="cafes">☕ Cafes</span>
+        <span class="tag" data-cat="shisha">💨 Shisha</span>
+        <span class="tag" data-cat="nightlife">🌙 Nightlife</span>
+        <span class="tag" data-cat="hotels">🏨 Hotels</span>
+        <span class="tag" data-cat="experiences">🎭 Experiences</span>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STICKY SEARCH (appears after hero) -->
+  <div id="sticky-search" class="sticky-search hidden">
+    <div class="sticky-inner">
+      <div class="logo-sm">Kəşf</div>
+      <div class="sticky-fields">
+        <input type="text" placeholder="Search…" id="sticky-search-input" />
+        <input type="text" placeholder="Location" id="sticky-location-input" value="Baku" />
+        <button class="search-btn-sm">Search</button>
+      </div>
+      <div class="sticky-cats" id="sticky-cats"></div>
+    </div>
+  </div>
+
+  <!-- STATS BAND -->
+  <section id="stats-band">
+    <div class="stat-item">
+      <span class="stat-num" data-target="12400">0</span>
+      <span class="stat-label">Businesses Listed</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="89000">0</span>
+      <span class="stat-label">Verified Reviews</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="340">0</span>
+      <span class="stat-label">Cities & Towns</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="98">0</span>
+      <span class="stat-label">% Satisfaction</span>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="categories-section">
+    <div class="section-header">
+      <p class="section-eyebrow">Browse by type</p>
+      <h2 class="section-title">What are you looking for?</h2>
+    </div>
+    <div class="categories-grid" id="categories-grid"></div>
+  </section>
+
+  <!-- FEATURED LISTINGS -->
+  <section id="featured-section">
+    <div class="section-header">
+      <p class="section-eyebrow">Editor's picks</p>
+      <h2 class="section-title">Trending in Baku</h2>
+      <div class="filter-pills" id="filter-pills"></div>
+    </div>
+    <div class="listings-grid" id="listings-grid"></div>
+    <div class="load-more-wrap">
+      <button class="btn-load-more" id="load-more-btn">Load more places</button>
+    </div>
+  </section>
+
+  <!-- PARALLAX BANNER -->
+  <section id="parallax-banner">
+    <div class="parallax-bg" id="parallax-bg"></div>
+    <div class="parallax-content">
+      <h2>Hidden Gems of<br /><em>Old City Baku</em></h2>
+      <p>Step inside the walls of İçərişəhər — UNESCO-listed, centuries old, full of secrets.</p>
+      <button class="btn-explore-white">Explore Old City →</button>
+    </div>
+  </section>
+
+  <!-- TOP REVIEWED -->
+  <section id="top-reviewed">
+    <div class="section-header">
+      <p class="section-eyebrow">Community favourites</p>
+      <h2 class="section-title">Most Loved This Week</h2>
+    </div>
+    <div class="horizontal-scroll-wrap">
+      <div class="horizontal-scroll" id="horizontal-scroll"></div>
+    </div>
+  </section>
+
+  <!-- CTA FOR BUSINESS -->
+  <section id="biz-cta">
+    <div class="biz-cta-inner">
+      <div class="biz-left">
+        <p class="section-eyebrow" style="color:#D4A843">For business owners</p>
+        <h2>Is your business on Kəşf?</h2>
+        <p>Join 12,400+ businesses reaching thousands of customers across Azerbaijan every day.</p>
+        <div class="biz-features">
+          <div class="biz-feat"><span class="feat-dot"></span>Free to list your business</div>
+          <div class="biz-feat"><span class="feat-dot"></span>Respond to reviews publicly</div>
+          <div class="biz-feat"><span class="feat-dot"></span>Analytics dashboard included</div>
+          <div class="biz-feat"><span class="feat-dot"></span>Boost visibility with ads</div>
+        </div>
+        <button class="btn-gold">Claim your listing</button>
+      </div>
+      <div class="biz-right">
+        <div class="biz-mockup" id="biz-mockup"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="logo-k">K</span><span class="logo-rest">əşf</span>
+        <p>Discovering Azerbaijan, one review at a time.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Discover</h4>
+          <a href="#">Restaurants</a>
+          <a href="#">Cafes</a>
+          <a href="#">Hotels</a>
+          <a href="#">Nightlife</a>
+          <a href="#">Events</a>
+        </div>
+        <div class="footer-col">
+          <h4>Cities</h4>
+          <a href="#">Baku</a>
+          <a href="#">Ganja</a>
+          <a href="#">Sheki</a>
+          <a href="#">Gabala</a>
+          <a href="#">Lankaran</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Blog</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Business</h4>
+          <a href="#">Advertise</a>
+          <a href="#">Claim listing</a>
+          <a href="#">Analytics</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Kəşf. Made with ❤️ in Baku.</span>
+      <div class="footer-socials">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
